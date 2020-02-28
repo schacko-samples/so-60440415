@@ -1,0 +1,16 @@
+=== Running the app
+
+This application is an adaptation of this blog: https://www.baeldung.com/spring-cloud-stream-kafka-avro-confluent
+
+The application is adapted to using Spring Cloud Stream `3.0.2.RELEASE`.
+
+The components are using the functional model by providing `Supplier` (producer) and `Consumer` (StreamListener) beans.
+
+The application communicates with Confluent schema registry and uses avro serialization and deserialization.
+
+Following are the instructions to run the app:
+
+1. Start Kafka Broker and Confluent Schema Registry (Expecting them to be available on default hostname/port).
+2. Run the application.
+3. Run this command: `curl -X POST localhost:8080/employees/1001/Harry/Potter`
+4. Watch the console of the application to ensure that the message is logged.

@@ -1,0 +1,31 @@
+spring:
+  cloud:
+    stream:
+      function:
+        definition: consumeEmployeeDetails;employeeStream
+      default:
+        producer:
+          useNativeEncoding: true
+        consumer:
+          useNativeDecoding: true
+      bindings:
+        consumeEmployeeDetails-in-0:
+          destination: employee-details
+          group: group-1
+        employeeStream-out-0:
+          destination: employee-details
+      kafka:
+        bindings:
+          employeeStream-out-0:
+            producer:
+              configuration:
+                key.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+                value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+                schema.registry.url: http://localhost:8081
+          consumeEmployeeDetails-in-0:
+            consumer:
+              configuration:
+                key.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+                value.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+                schema.registry.url: http://localhost:8081
+                specific.avro.reader: true
